@@ -7,22 +7,36 @@ import static org.testng.Assert.*;
 public class CashbackServiceTest {
     CashbackService service = new CashbackService();
 
-    @Test
-    public void shouldRemainIfMoreThan1000 () {
-        int bonus = service.remain(1500);
-        assertEquals(bonus,500);
+ @Test
+    public void shouldShowBelowBoundary() {
+        int purchaseCost = 600;
+        int actualResult = service.remain(purchaseCost);
+        int expectedResult = 400;
+        assertEquals(actualResult, expectedResult);
     }
 
     @Test
-    public void shouldRemainIfLessThan1000 () {
-        int bonus = service.remain(900);
-        assertEquals(bonus,100);
+    public void shouldhowHigherBoundary(){
+        int purchaseCost = 1300;
+        int actualResult = service.remain(purchaseCost);
+        int expectedResult = 700;
+        assertEquals(actualResult, expectedResult);
     }
 
     @Test
-    public void shouldRemainIf1000 () {
-        int bonus = service.remain(1000);
-        assertEquals(bonus,0);
+    public void shouldShowNullBoundary() {
+        int purchaseCost = 0;
+        int actualResult = service.remain(purchaseCost);
+        int expectedResult = 1000;
+        assertEquals(actualResult, expectedResult);
+    }
+
+    @Test
+    public void shouldShowEqualBoundary() {
+        int purchaseCost = 1000;
+        int actualResult = service.remain(purchaseCost);
+        int expectedResult = 1000;
+        assertEquals(actualResult, expectedResult);
     }
 
 }
