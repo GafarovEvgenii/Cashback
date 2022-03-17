@@ -8,35 +8,25 @@ public class CashbackServiceTest {
     CashbackService service = new CashbackService();
 
  @Test
-    public void shouldShowBelowBoundary() {
-        int purchaseCost = 600;
-        int actualResult = service.remain(purchaseCost);
-        int expectedResult = 400;
-        assertEquals(actualResult, expectedResult);
+    public void shouldAmountLessThan1000() {
+        int actual = service.remain(900);
+        int expected = 100;
+        assertEquals(actual, expected);
+    }
+
+
+    @Test
+    public void shouldAmountMoreThan1000() {
+        int actual = service.remain(1100);
+        int expected = 900;
+        assertEquals(actual, expected);
     }
 
     @Test
-    public void shouldhowHigherBoundary(){
-        int purchaseCost = 1300;
-        int actualResult = service.remain(purchaseCost);
-        int expectedResult = 700;
-        assertEquals(actualResult, expectedResult);
-    }
-
-    @Test
-    public void shouldShowNullBoundary() {
-        int purchaseCost = 0;
-        int actualResult = service.remain(purchaseCost);
-        int expectedResult = 1000;
-        assertEquals(actualResult, expectedResult);
-    }
-
-    @Test
-    public void shouldShowEqualBoundary() {
-        int purchaseCost = 1000;
-        int actualResult = service.remain(purchaseCost);
-        int expectedResult = 1000;
-        assertEquals(actualResult, expectedResult);
+    public void shouldAmount1000() {
+        int actual = service.remain(1000);
+        int expected = 0;
+        assertEquals(actual, expected);
     }
 
 }
